@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* FullCalendar customizations */
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border-color: #e5e7eb;
+}
+
+.fc-theme-standard .fc-scrollgrid {
+  border-color: #e5e7eb;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.fc-daygrid-day-number {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.fc-daygrid-day-events {
+  padding: 0 2px;
+}
+
+.fc-event {
+  border-radius: 6px;
+  border: none;
+  padding: 3px 6px;
+  margin-bottom: 3px;
+  font-size: 0.75rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.fc-day-today {
+  background-color: rgba(124, 58, 237, 0.1) !important;
+}
+
+.fc-col-header-cell {
+  background-color: #f9fafb;
+  font-weight: 700;
+}
+
+.fc-daygrid-day-frame {
+  min-height: 120px !important;
+}
+
+.fc-col-header-cell-cushion {
+  padding: 8px;
+  color: #4b5563;
+}
+
+.fc-daygrid-day.fc-day-past {
+  background-color: rgba(249, 250, 251, 0.5);
+}
+
+.fc-daygrid-more-link {
+  background: rgba(124, 58, 237, 0.1);
+  border-radius: 4px;
+  padding: 2px 4px;
+  font-weight: 500;
+  color: #7c3aed;
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}
