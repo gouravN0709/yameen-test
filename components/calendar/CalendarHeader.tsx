@@ -58,7 +58,7 @@ export function CalendarHeader({
           Day
         </button>
         <button
-          onClick={() => console.log("Event view clicked")}
+          onClick={() => onViewChange("listWeek")}
           className="rounded-r-sm px-4 py-2 bg-[#9013FE] text-white hover:bg-slate-100"
         >
           Event

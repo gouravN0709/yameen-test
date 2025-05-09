@@ -6,7 +6,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { Button } from "@nextui-org/button";
 import { useState } from "react";
 import { queryClient } from "@/app/providers";
-import useEventStore from "@/lib/zustand/store";
+import {useEventStore} from "@/lib/zustand/store";
 // import FullCalendar from "@fullcalendar/react";
 // import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 

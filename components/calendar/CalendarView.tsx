@@ -5,9 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { CalendarHeader } from "./CalendarHeader";
 import { CalendarBody } from "./CalendarBody";
 import { EventManagementModal } from "./EventManagementModal";
-import { CreateEventModal } from "./CreateEventModal";
 import { LeaveSummarySidebar } from "../sidebar/LeaveSummarySidebar";
-import { Sidebar } from "../sidebar/Sidebar";
 import { useEventStore, useFilterStore } from "@/lib/zustand/store";
 
 const colorCodes = {
@@ -182,15 +180,6 @@ export function CalendarView() {
     }
   };
 
-  // Handle delete event
-  const handleDelete = () => {
-    if (selectedEvent) {
-      deleteEvent(selectedEvent.id);
-      setIsModalOpen(false);
-      setSelectedEvent(null);
-    }
-  };
-
   // Close modals
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -210,7 +199,6 @@ export function CalendarView() {
 
   return (
     <div className="flex flex-1 overflow-hidden mt-12">
-      {/* <Sidebar /> */}
       <div className="flex-1 p-4 border-2 border-t-[#F5A623]">
         <CalendarHeader
           onPrev={handlePrev}

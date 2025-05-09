@@ -1,10 +1,11 @@
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
+import listPlugin from "@fullcalendar/list"; // Added list plugin
 import interactionPlugin from "@fullcalendar/interaction";
 
 interface CalendarBodyProps {
-  calendarRef: React.RefObject<FullCalendar>;
+  calendarRef: React.RefObject<any>;
   events: any[];
   onEventClick: (info: any) => void;
   onDateClick: (info: any) => void;
@@ -19,20 +20,26 @@ export function CalendarBody({
   onDatesSet,
 }: CalendarBodyProps) {
   return (
-    <div className="calendar-container rounded-xl bg-white p-4 shadow-md">
+    <div className="calendar-body">
       <FullCalendar
         ref={calendarRef}
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+        plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin]}
         initialView="dayGridMonth"
-        initialDate="2025-02-01"
-        headerToolbar={false}
         events={events}
-        eventDisplay="block"
-        height="auto"
-        dayMaxEvents={1}
         eventClick={onEventClick}
         dateClick={onDateClick}
         datesSet={onDatesSet}
+        headerToolbar={false} // Header is managed by CalendarHeader
+        height="auto"
+        editable={true}
+        selectable={true}
+        selectMirror={true}
+        dayMaxEvents={true}
+        eventTimeFormat={{
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        }}
       />
     </div>
   );
