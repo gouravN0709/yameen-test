@@ -41,15 +41,23 @@ export function CalendarBody({
           hour12: true,
         }}
         eventContent={(arg) => {
-          const { event } = arg;
+          const { event, view } = arg;
           const statusColor = event.extendedProps.statusColor;
+          const isMonthView = view.type === "listWeek";
+          console.log(view);
           return (
             <div className="flex items-center w-full">
               <span
                 className="status-dot w-2 h-2 rounded-full mr-2"
                 style={{ backgroundColor: statusColor }}
               ></span>
-              <span className="event-title truncate">{event.title}</span>
+              <span
+                className={`event-title truncate ${
+                  isMonthView ? "text-black" : "text-white"
+                }`}
+              >
+                {event.title}
+              </span>
             </div>
           );
         }}

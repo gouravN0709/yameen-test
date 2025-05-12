@@ -33,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang='en'>
+    <html suppressHydrationWarning lang="en">
       <head />
       <body
         className={clsx(
@@ -41,21 +41,21 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className='relative flex flex-col h-screen'>
+        <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
+          <div className="relative flex flex-col h-screen">
             <Navbar />
-            <main className='container-fluid mx-auto px-6 flex-grow'>
+            <main className="container-fluid mx-auto px-6 flex-grow">
               {children}
             </main>
-            <footer className='w-full flex items-center justify-center py-3'>
+            <footer className="w-full flex items-center justify-center py-3">
               <Link
                 isExternal
-                className='flex items-center gap-1 text-current'
-                href='https://nextui-docs-v2.vercel.app?utm_source=next-app-template'
-                title='nextui.org homepage'
+                className="flex items-center gap-1 text-current"
+                href="https://nextui-docs-v2.vercel.app?utm_source=next-app-template"
+                title="nextui.org homepage"
               >
-                <span className='text-default-600'>Powered by</span>
-                <p className='text-primary'>NextUI</p>
+                <span className="text-default-600">Powered by</span>
+                <p className="text-primary">NextUI</p>
               </Link>
             </footer>
           </div>
