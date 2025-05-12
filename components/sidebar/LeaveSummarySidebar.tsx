@@ -1,4 +1,5 @@
-import { useEventStore } from "@/lib/zustand/useEventStore";
+import { useEventStore } from "@/lib/zustand/store";
+
 
 interface LeaveSummarySidebarProps {
   selectedDate: string; // Format: "YYYY-MM-DD"
