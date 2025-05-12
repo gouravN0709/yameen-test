@@ -7,7 +7,7 @@ export function Sidebar() {
   const { clearSelections } = useFilterStore();
 
   return (
-    <div className="w-72 border-2 border-t-[#9013FE] bg-white overflow-y-auto shadow-sm">
+    <div className="w-72 border-2 border-t-[#9013FE] bg-white overflow-y-auto shadow-sm ">
       <DepartmentFilter />
       <div className="h-0.5 mx-4 my-4 bg-gradient-to-r from-[#F5A623] to-amber-300 rounded-full" />
       <EmployeeFilter />

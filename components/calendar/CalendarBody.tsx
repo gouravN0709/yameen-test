@@ -1,7 +1,7 @@
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
-import listPlugin from "@fullcalendar/list"; // Added list plugin
+import listPlugin from "@fullcalendar/list";
 import interactionPlugin from "@fullcalendar/interaction";
 
 interface CalendarBodyProps {
@@ -29,7 +29,7 @@ export function CalendarBody({
         eventClick={onEventClick}
         dateClick={onDateClick}
         datesSet={onDatesSet}
-        headerToolbar={false} // Header is managed by CalendarHeader
+        headerToolbar={false}
         height="auto"
         editable={true}
         selectable={true}
@@ -39,6 +39,19 @@ export function CalendarBody({
           hour: "2-digit",
           minute: "2-digit",
           hour12: true,
+        }}
+        eventContent={(arg) => {
+          const { event } = arg;
+          const statusColor = event.extendedProps.statusColor;
+          return (
+            <div className="flex items-center w-full">
+              <span
+                className="status-dot w-2 h-2 rounded-full mr-2"
+                style={{ backgroundColor: statusColor }}
+              ></span>
+              <span className="event-title truncate">{event.title}</span>
+            </div>
+          );
         }}
       />
     </div>

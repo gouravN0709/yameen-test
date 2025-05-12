@@ -8,16 +8,6 @@ import { EventManagementModal } from "./EventManagementModal";
 import { LeaveSummarySidebar } from "../sidebar/LeaveSummarySidebar";
 import { useEventStore, useFilterStore } from "@/lib/zustand/store";
 
-const colorCodes = {
-  approved: "#378000",
-  pending: "#fff000",
-  rejected: "#FF0000",
-  blue: "#3788d8",
-  cyan: "#00d4ff",
-  pink: "#ff49db",
-  purple: "#9c27b0",
-};
-
 export function CalendarView() {
   const today = new Date().toISOString().split("T")[0];
   const [selectedDate, setSelectedDate] = useState<string>(today);
@@ -33,7 +23,8 @@ export function CalendarView() {
     employeeId: "",
   });
   const calendarRef = useRef<any>(null);
-  const { events, addEvent, updateEvent, deleteEvent } = useEventStore();
+  const { events, addEvent, updateEvent, deleteEvent, setEventStatus } =
+    useEventStore();
   const { employees, selectedDepartment, selectedEmployee } = useFilterStore();
 
   // Filter employees based on selected department
@@ -61,12 +52,15 @@ export function CalendarView() {
       id: event.id,
       title: event.title,
       date: event.date,
-      backgroundColor: event.color,
-      className: event.className,
+      backgroundColor: event.color, // Employee's color
+      borderColor: event.color,
+      className: `text-white text-xs status-dot status-${event.status}`,
       extendedProps: {
         reason: event.reason,
         description: event.description,
         employeeId: event.employeeId,
+        status: event.status,
+        statusColor: event.statusColor,
       },
     }));
   }, [events, selectedDepartment, selectedEmployee, employees]);
@@ -140,15 +134,18 @@ export function CalendarView() {
   // Handle create event
   const handleCreateEvent = () => {
     if (newEvent.title && newEvent.date && newEvent.employeeId) {
+      const employee = employees.find((emp) => emp.id === newEvent.employeeId);
       const event = {
         id: uuidv4(),
         title: newEvent.title,
         date: newEvent.date,
-        color: colorCodes.blue,
-        className: "text-white text-xs",
+        color: employee?.color || "#3788d8", // Use employee's color
+        className: "text-white text-xs status-dot status-normal",
         reason: newEvent.reason,
         description: newEvent.description,
         employeeId: newEvent.employeeId,
+        status: "normal" as "accepted" | "rejected" | "normal",
+        statusColor: "#7f8c8d", // Default for normal
       };
       addEvent(event);
       setIsCreateModalOpen(false);
@@ -165,7 +162,7 @@ export function CalendarView() {
   // Handle approve event
   const handleApprove = () => {
     if (selectedEvent) {
-      updateEvent(selectedEvent.id, { color: colorCodes.approved });
+      setEventStatus(selectedEvent.id, "accepted");
       setIsModalOpen(false);
       setSelectedEvent(null);
     }
@@ -174,7 +171,7 @@ export function CalendarView() {
   // Handle reject event
   const handleReject = () => {
     if (selectedEvent) {
-      updateEvent(selectedEvent.id, { color: colorCodes.rejected });
+      setEventStatus(selectedEvent.id, "rejected");
       setIsModalOpen(false);
       setSelectedEvent(null);
     }
@@ -198,7 +195,7 @@ export function CalendarView() {
   };
 
   return (
-    <div className="flex flex-1 overflow-hidden mt-12">
+    <div className="flex flex-1 overflow-hidden mt-12 z-40">
       <div className="flex-1 p-4 border-2 border-t-[#F5A623]">
         <CalendarHeader
           onPrev={handlePrev}

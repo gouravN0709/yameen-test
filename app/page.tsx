@@ -1,17 +1,11 @@
 "use client";
 
-import { dehydrate, } from "@tanstack/react-query";
-import { getTodos } from "@/lib/db";
-import getQueryClient from "@/components/QueryClient";
 import { CalendarView } from "@/components/calendar/CalendarView";
 import { Sidebar } from "@/components/sidebar/Sidebar";
 const page = async () => {
-  const queryClient = getQueryClient();
-  await queryClient.prefetchQuery({ queryKey: ["todos"], queryFn: getTodos });
-
   return (
     <>
-      <div className="flex h-screen flex-col">
+      <div className="flex h-screen flex-col z-100">
         <div className="flex flex-1 gap-1 overflow-hidden">
           <div className="pt-12">
             <Sidebar />

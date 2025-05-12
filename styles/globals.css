@@ -67,3 +67,8 @@
   width: 0;
   display: none;
 }
+
+body {
+  background-color: white !important;
+  color: black !important;
+}
