@@ -46,19 +46,19 @@ export function CalendarHeader({
           Month
         </button>
         <button
-          className="px-4 py-2 bg-[#9013FE] text-white hover:bg-slate-100"
+          className="px-4 py-2 bg-[#9013FE] text-white"
           onClick={() => onViewChange("timeGridWeek")}
         >
           Week
         </button>
         <button
-          className="px-4 py-2 bg-[#9013FE] text-white hover:bg-slate-100"
+          className="px-4 py-2 bg-[#9013FE] text-white"
           onClick={() => onViewChange("timeGridDay")}
         >
           Day
         </button>
         <button
-          className="rounded-r-sm px-4 py-2 bg-[#9013FE] text-white hover:bg-slate-100"
+          className="rounded-r-sm px-4 py-2 bg-[#9013FE] text-white "
           onClick={() => onViewChange("listWeek")}
         >
           Event

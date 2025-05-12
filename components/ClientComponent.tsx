@@ -1,11 +1,10 @@
 "use client";
 
-import {getTodos } from "@/lib/db";
 import { Input } from "@nextui-org/input";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Button } from "@nextui-org/button";
 import { useState } from "react";
-import {useEventStore} from "@/lib/zustand/store";
+import { useEventStore } from "@/lib/zustand/store";
 // import FullCalendar from "@fullcalendar/react";
 // import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 
@@ -16,7 +15,6 @@ export default function ClientComponent({
 }) {
   const { data, isLoading, error } = useQuery({
     queryKey: ["todos"],
-    queryFn: getTodos,
   });
 
   const [title, setTitle] = useState("");

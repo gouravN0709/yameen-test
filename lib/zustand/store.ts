@@ -28,14 +28,14 @@ const initialEmployees = [
     id: "jenny1",
     label: "Jenny Wilson",
     checked: false,
-    color: "#00d4ff", // Cyan
+    color: "#3dd6f9", // Cyan
     departmentId: "security",
   },
   {
     id: "brooklyn",
     label: "Brooklyn Simmons",
     checked: false,
-    color: "#f1c40f", // Yellow
+    color: "#80B36D", // Yellow
     departmentId: "belldesk",
   },
 ];
@@ -159,7 +159,7 @@ export interface Event {
   reason: string;
   description: string;
   employeeId: string;
-  status: "accepted" | "rejected" | "normal";
+  status: "accepted" | "rejected" | "pending";
   statusColor?: string; // Optional: for dot color
 }
 
@@ -170,7 +170,7 @@ interface EventState {
   deleteEvent: (id: string) => void;
   setEventStatus: (
     id: string,
-    status: "accepted" | "rejected" | "normal"
+    status: "accepted" | "rejected" | "pending"
   ) => void;
 }
 
@@ -199,8 +199,8 @@ export const useEventStore = create<EventState>()(
           reason: "Family gathering",
           description: "Attending a family reunion.",
           employeeId: "esther",
-          status: "normal",
-          statusColor: "#7f8c8d", // Gray for normal
+          status: "pending",
+          statusColor: "#FFC000", // Gray for pending
         },
         {
           id: "3",
@@ -218,13 +218,13 @@ export const useEventStore = create<EventState>()(
           id: "4",
           title: "Shift Change",
           date: "2025-02-04",
-          color: "#f1c40f", // Brooklyn's color
+          color: "#80B36D", // Brooklyn's color
           className: "text-white text-xs",
           reason: "Prior commitment",
           description: "Need to swap shifts.",
           employeeId: "brooklyn",
-          status: "normal",
-          statusColor: "#7f8c8d",
+          status: "pending",
+          statusColor: "#FFC000",
         },
         {
           id: "5",
@@ -266,13 +266,13 @@ export const useEventStore = create<EventState>()(
           id: "8",
           title: "Sick Leave",
           date: "2025-02-05",
-          color: "#f1c40f", // Brooklyn's color
+          color: "#80B36D", // Brooklyn's color
           className: "text-white text-xs",
           reason: "Illness",
           description: "Recovering from flu.",
           employeeId: "brooklyn",
-          status: "normal",
-          statusColor: "#7f8c8d",
+          status: "pending",
+          statusColor: "#FFC000",
         },
         {
           id: "9",
@@ -283,8 +283,8 @@ export const useEventStore = create<EventState>()(
           reason: "Attending a wedding",
           description: "Friend's wedding ceremony.",
           employeeId: "leslie",
-          status: "normal",
-          statusColor: "#7f8c8d",
+          status: "pending",
+          statusColor: "#FFC000",
         },
         {
           id: "10",
@@ -307,14 +307,14 @@ export const useEventStore = create<EventState>()(
           reason: "Dental appointment",
           description: "Routine dental checkup.",
           employeeId: "jenny1",
-          status: "normal",
-          statusColor: "#7f8c8d",
+          status: "pending",
+          statusColor: "#FFC000",
         },
         {
           id: "12",
           title: "Family Leave",
           date: "2025-02-07",
-          color: "#f1c40f", // Brooklyn's color
+          color: "#80B36D", // Brooklyn's color
           className: "text-white text-xs",
           reason: "Family emergency",
           description: "Need to attend to family matters.",
@@ -347,7 +347,7 @@ export const useEventStore = create<EventState>()(
                       ? "#2ecc71"
                       : status === "rejected"
                         ? "#e74c3c"
-                        : "#7f8c8d",
+                        : "#FFC000",
                 }
               : event
           ),

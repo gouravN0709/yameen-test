@@ -140,12 +140,12 @@ export function CalendarView() {
         title: newEvent.title,
         date: newEvent.date,
         color: employee?.color || "#3788d8", // Use employee's color
-        className: "text-white text-xs status-dot status-normal",
+        className: "text-white text-xs status-dot status-pending",
         reason: newEvent.reason,
         description: newEvent.description,
         employeeId: newEvent.employeeId,
-        status: "normal" as "accepted" | "rejected" | "normal",
-        statusColor: "#7f8c8d", // Default for normal
+        status: "pending" as "accepted" | "rejected" | "pending",
+        statusColor: "#7f8c8d", // Default for pending
       };
       addEvent(event);
       setIsCreateModalOpen(false);

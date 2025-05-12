@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useEventStore, useFilterStore } from "@/lib/zustand/store";
 
@@ -13,7 +12,9 @@ export function LeaveSummarySidebar({
   const { employees } = useFilterStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
-  const [actionType, setActionType] = useState<"accept" | "reject" | null>(null);
+  const [actionType, setActionType] = useState<"accept" | "reject" | null>(
+    null
+  );
 
   // Filter events for the selected date
   const leaveEvents = events.filter((event) => event.date === selectedDate);
@@ -46,7 +47,7 @@ export function LeaveSummarySidebar({
   };
 
   return (
-    <div className="w-72 border-2 border-t-[#9013FE] bg-white p-6 overflow-y-auto shadow-lg ml-2 h-full scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+    <div className="w-72 border-2 h-[100vh] border-t-[#9013FE] bg-white p-6 overflow-y-auto shadow-lg ml-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 custom-scroll">
       <div className="mb-6 text-xl font-semibold text-slate-800">
         Leaves for{" "}
         {new Date(selectedDate).toLocaleDateString("en-US", {
@@ -56,14 +57,18 @@ export function LeaveSummarySidebar({
         })}
       </div>
       {leaveEvents.length === 0 ? (
-        <div className="text-sm text-slate-500 italic">No leaves scheduled.</div>
+        <div className="text-sm text-slate-500 italic">
+          No leaves scheduled.
+        </div>
       ) : (
         leaveEvents.map((event) => {
           const employee = employees.find((emp) => emp.id === event.employeeId);
+          console.log("event", event);
           return (
             <div
               key={event.id}
-              className="mb-4 bg-[#B3A1F4] rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
+              style={{ backgroundColor: event.color || "#e2e8f0" }}
+              className={`mb-4  rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200`}
             >
               <div className="border-l-4 border-[#FFCC00] p-4">
                 <h3 className="text-lg font-bold text-black">{event.title}</h3>
@@ -91,21 +96,34 @@ export function LeaveSummarySidebar({
                     </p>
                   </>
                 )}
-                <div className="mt-4 flex space-x-3">
-                  <button
-                    onClick={() => handleActionClick(event.id, "accept")}
-                    className="px-4 py-1.5 bg-[#2ecc71] text-white text-sm font-medium rounded-md hover:bg-[#27ae60] transition-colors duration-200"
-                  >
-                    Accept
-                  </button>
-                  <button
-                    onClick={() => handleActionClick(event.id, "reject")}
-                    className="px-4 py-1.5 bg-[#e74c3c] text-white text-sm font-medium rounded-md hover:bg-[#c0392b] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                    disabled={event.status === "rejected"}
-                  >
-                    Reject
-                  </button>
-                </div>
+                {event.status && (
+                  <>
+                    <h4 className="mt-4 text-sm font-semibold text-black">
+                      Status:
+                    </h4>
+                    <p className="text-sm text-black leading-relaxed">
+                      {event.status}
+                    </p>
+                  </>
+                )}
+                {event?.status === "pending" ? (
+                  <div className="mt-4 flex space-x-3">
+                    <button
+                      onClick={() => handleActionClick(event.id, "accept")}
+                      className="px-4 py-1.5 bg-[#2ecc71] text-white text-sm font-medium rounded-md hover:bg-[#27ae60] transition-colors duration-200"
+                    >
+                      Accept
+                    </button>
+                    <button
+                      onClick={() => handleActionClick(event.id, "reject")}
+                      className="px-4 py-1.5 bg-[#e74c3c] text-white text-sm font-medium rounded-md hover:bg-[#c0392b] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      Reject
+                    </button>
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           );
